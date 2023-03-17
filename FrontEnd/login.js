@@ -12,8 +12,8 @@ inputEmail.addEventListener("blur", function () {
 });
 
 // Envoi du formulaire et réception/stokage du token dans le localStorage
-formLogin.addEventListener("submit", function (event) {
-    event.preventDefault();
+formLogin.addEventListener("submit", function (e) {
+    event.preventDefault(e);
 
     const loginData = {
         email : inputEmail.value,
