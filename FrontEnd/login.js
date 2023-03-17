@@ -1,30 +1,25 @@
-// email: sophie.bluel@test.tld
-// password: S0phie 
+let userToken = null;
 
-// export let userToken;
-
-let userToken;
-
+//Sélection du formulaire et de ses éléments input
 const formLogin = document.querySelector("#login form");
 const inputEmail = document.querySelector("form input[type='email']");
 const inputPassword = document.querySelector("form input[type='password']");
 const submitLogin = document.querySelector("form input[type='submit']");
 
+// Vérification de la validité du mail à la perte de focus de l'input email
 inputEmail.addEventListener("blur", function () {
     inputEmail.reportValidity();
 });
 
+// Envoi du formulaire et réception/stokage du token dans le localStorage
 formLogin.addEventListener("submit", function (event) {
     event.preventDefault();
+
     const loginData = {
         email : inputEmail.value,
         password : inputPassword.value,
     };
-    console.log(inputEmail.value);
-    console.log(inputPassword.value);
-    console.log(loginData);
     const loginDataString = JSON.stringify(loginData);
-    console.log(loginDataString);
 
     fetch("http://localhost:5678/api/users/login", {
         method: "POST",
@@ -32,23 +27,16 @@ formLogin.addEventListener("submit", function (event) {
         body: loginDataString
     })
     .then(function (response) {
-        console.log(response);
-        console.log(response.status);
-    
         if (response.status === 200) {
             response = response.json();
-            console.log(response);
             response.then(function (result) {
-            console.log(result);
-            console.log(result.token);
-            userToken = result.token;
-            console.log(userToken);
-            window.localStorage.setItem("token", userToken);
-            document.location.href="index.html"; 
+                userToken = result.token;
+                window.localStorage.setItem("token", userToken);
+                document.location.href="index.html"; 
             })
         } else {
-            console.log("Fail.");
-            alert("Email ou mot de passe incorrect. ");
+            alert("Erreur dans l’identifiant ou le mot de passe.");
         }
     })
+    .catch(error => console.log(error.message));
 });

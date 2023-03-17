@@ -52,8 +52,10 @@ body {
 	margin:auto;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
+	background-color: #fffef8;
 }
 
+/* Bandeau Admin */
 .controls-modal-container {
 	display: flex;
 	align-items: center;
@@ -61,13 +63,10 @@ body {
 	background-color: #000;
 	width: 100%;
 	padding: 10px 0;
-	gap: 20px;	
+	gap: 25px;
 }
-.controls-modal-container button {
-	display: block;
-}
-.edit-button {
-	border: none;
+.edit-mode {
+	text-decoration: none;
 	background-color: #000;
 	color: #fff;
 	font-family: 'Work Sans';
@@ -75,7 +74,7 @@ body {
 	font-weight: 400;
 	cursor: pointer;
 }
-.edit-button i {
+.edit-mode i {
 	font-weight: 400;
 }
 .apply-button {
@@ -85,11 +84,295 @@ body {
 	border: none;
 	background-color: #fff;
 	color: #000;
-	padding: 10px;
+	padding: 10px 20px;
 	border-radius: 20px;
 	cursor: pointer;
 }
 
+/* Fenêtre modale  */
+.modal {
+	position: fixed;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	z-index: 1;
+}
+.overlay {
+	background-color: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	display: none;
+}
+/* Modale page "Galerie" */
+.modal-wrapper-gallery {
+	background-color: #fff;
+	width: 50%;
+	height: 750px;
+	padding: 20px;
+	border-radius: 5px;
+	display: none;
+	max-width: 600px;
+	overflow: scroll;
+}
+.title-modal {
+	font-family: 'Work Sans';
+	font-size: 26px;
+	font-weight: 400;
+	text-align: center;
+	color: #000;
+	margin-bottom: 50px;
+}
+.modal-gallery-close-container {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.modal-close-gallery-button,
+.modal-previous-button,
+.modal-close-add-photo-button {
+	border: none;
+	background-color: #fff;
+	font-size: 22px;
+	cursor: pointer;
+	padding: 3px;
+}
+.modal-gallery {
+	width: 80%;
+	max-width: 700px;
+	margin: 0 auto 50px auto;
+	display:grid;
+	grid-template-columns: repeat(auto-fill, 80px);
+	gap: 15px;
+	justify-content: center;
+}
+.work-card {
+	position: relative;
+	overflow: hidden;
+}
+.modal-gallery img {
+	width: 100%;
+	object-fit: cover;
+}
+.enlarge-link {
+	text-decoration: none;
+	color: #fff;
+}
+.work-card-icons {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 3px;
+}
+.work-card-icons button {
+	width: 17px;
+	height: 17px;
+	padding: 0;
+	background-color: #000;
+	color: #fff;
+	border: none;
+	border-radius: 3px;
+	cursor: pointer;
+}
+.work-card-icons i {
+	font-size: 11px;
+	display: block;
+}
+.enlarge-button {
+	transform: translateY(-150%);
+	transition: transform 0.3s ease-in-out;
+}
+.work-card:hover .enlarge-button {
+	transform: translate(0);
+}
+.edit-work {
+	border: none;
+	background-color: #fff;
+	font-size: 12px;
+}
+.modal-gallery-buttons-container {
+	width: 80%;
+	margin: 0 auto 20px auto;
+	padding-top: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border-top: solid 1px #B3B3B3;
+	gap: 20px;
+}
+.new-photo-button { 
+	border-radius: 40px; 
+	border: none; 
+	background-color: #1d6154; 
+	color: #fff; 
+	font-family: 'Syne'; 
+	font-size: 14px; 
+	font-weight: 700;
+	padding: 10px 50px; 
+	cursor: pointer;
+	width: 240px;
+}
+.new-photo-button:hover,
+.validate-button:hover {
+	background-color: #0E2F28;
+}
+.delete-gallery-button {
+	border-radius: 40px; 
+	border: none; 
+	background-color: #fff; 
+	color: #D65353;
+	font-family: 'Syne'; 
+	font-size: 14px; 
+	font-weight: 400;
+	cursor: pointer;
+}
+/* Modale page "Ajout photo" */
+.modal-wrapper-add-photo {
+	background-color: #fff;
+	height: 750px;
+	width: 50%;
+	padding: 20px;
+	border-radius: 5px;
+	display: none;
+	max-width: 600px;
+	overflow: scroll;
+}
+.modal-add-photo-close-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.modal-form {
+	margin: 0 auto 0 auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 50px;
+	width: 80%;
+}
+.modal-input-image-container {
+	width: 100%;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.modal-label-image {
+	width: 100%;
+	height: 200px;
+	background-color: #E8F1F6;
+	border-radius: 3px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	padding: 10px 0;
+	box-sizing: border-box;
+	position: relative;
+	cursor: pointer;
+}
+.fa-image {
+	font-size: 60px;
+	color: #B9C5CC;
+	margin-bottom: 10px;
+}
+.add-button-input-image {
+	background: #CBD6DC;
+	color: #306685;
+	padding: 10px 0;
+	border-radius: 30px;
+	width: 200px;
+	text-align: center;
+}
+#modal-input-image {
+	visibility: hidden;
+}
+.requirements-input-image {
+	color: #444444;
+	font-size: 10px;
+}
+.hide {
+	display: inline-block;
+}
+#image-preview {
+	position: absolute;
+}
+.modal-input-description-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 5px;
+	width: 100%;
+}
+#modal-input-description {
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	width: 100%;
+	max-width: 480px !important;
+	height: 50px;
+	border: none;
+	padding-left: 20px;
+	box-sizing: border-box;
+}
+.modal-input-category-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+	gap: 5px;
+	width: 100%;
+}
+#modal-input-category {
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+	width: 100%;
+	height: 50px;
+	border: none;
+	background-color: #fff;
+	padding-left: 20px;
+	box-sizing: border-box;
+}
+.modal-add-photo-buttons-container {
+	width: 100%;
+	margin: 0 auto 20px auto;
+	padding-top: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	border-top: solid 1px #B3B3B3;
+	gap: 20px;
+}
+.validate-button { 
+	border-radius: 40px; 
+	border: none; 
+	background-color: #1d6154; 
+	color: #fff; 
+	font-family: 'Syne'; 
+	font-size: 14px; 
+	font-weight: 700;
+	padding: 10px 50px; 
+	cursor: pointer;
+	width: 240px;
+}
+
+.validate-button:disabled {
+	background-color: #a7a7a7;
+	cursor: not-allowed;
+}
+
+/* Header */
 header {
 	display: flex;
 	justify-content: space-between;
@@ -99,7 +382,7 @@ section {
 	margin: 50px 0
 }
 
-h1{
+h1 {
 	display: flex;
 	flex-direction: column;
 	font-family: 'Syne';
@@ -162,19 +445,32 @@ header button:hover {
 	align-items: center;
 }
 #introduction figure {
-	flex: 1
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+.eb-intro-figure {
+	margin: auto;
+	width: 80%;
+	margin: auto;
 }
 #introduction img {
 	display: block;
-	margin: auto;
 	width: 80%;
+	margin: auto;
 }
-
 #introduction article {
 	flex: 1
 }
 #introduction h2 {
 	margin-bottom: 1em;
+	position: relative;
+}
+.eb-intro-title {
+	position: absolute;
+	bottom: 60px;
+	left: 0;
 }
 
 #introduction p {
@@ -182,7 +478,35 @@ header button:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-top: 150px;
+	margin-bottom: 80px;
+	position: relative;
+}
+.eb-portfolio-title {
+	position: absolute;
+	font: initial;
+	top: 0;
+	right: calc(50% - 220px);
+	top: 20%;
+}
+.edit-button {
+	color:#000;
+	font: initial;
+	font-size: 14px;
+	font-family: "Work Sans";
+	font-weight: 400;
+	cursor: pointer;
+	display: block;
+}
+
+.filters {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	width: 100%;
+	margin-top: 100px;
+	margin-bottom: 40px;
 }
 .gallery {
 	width: 100%;
@@ -194,7 +518,6 @@ header button:hover {
 
 .gallery img {
 	width: 100%;
-
 }
 #contact {
 	width: 50%;
@@ -285,4 +608,8 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+footer a {
+	text-decoration: none;
+	color: #000;
 }
