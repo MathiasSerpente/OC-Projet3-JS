@@ -364,7 +364,7 @@ body {
 	font-weight: 700;
 	padding: 10px 50px; 
 	cursor: pointer;
-	width: 240px;
+	min-width: 240px;
 }
 .validate-button:disabled {
 	background-color: #a7a7a7;
