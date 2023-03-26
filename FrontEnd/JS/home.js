@@ -5,7 +5,6 @@ let categoriesSet = new Set();
 let filteredWorks= [];
 let figureAddedToGallery = new Object();
 let token = window.localStorage.getItem("token");
-console.log(token);
 
 // Sélection du bandeau Admin et de ses éléments
 const controlsModalContainer = document.querySelector(".controls-modal-container");
@@ -65,16 +64,11 @@ function fetchWorksAndCategories() {
             categoriesSet.add(categoryofWorkJSON);
         }
     })
-    .then(function () {
-        console.log(works);
-        console.log(categories);
-    })
     .catch(error => console.log(error.message));
 }
 
 // Fonction pour générer la gallerie de la fenêtre modale
 function generateWorksModalGallery(array) {
-    console.log(array);
     modalGallery.innerHTML = "";
     for (let i = 0; i < array.length; i++) {
         const work = array[i];
@@ -104,10 +98,8 @@ function generateWorksModalGallery(array) {
                         removedElement.remove();
                     }
                     fetchWorksAndCategories();
-                    console.log(response);
                 } else {
                     alert("La photo n'a pu être supprimée.");
-                    console.log(response);
                 }
             })
             .catch(error => console.log(error.message));
@@ -117,7 +109,6 @@ function generateWorksModalGallery(array) {
 
 // Fonction de génération des options du select
 function generateOptions(array) {
-    console.log(array);
     for (let i = 0; i < array.length; i++) {
         const category = array[i];
         const optionElement = document.createElement("option");
@@ -129,7 +120,6 @@ function generateOptions(array) {
 
 // Fonction pour créer un Work
 function generateWork (object) {
-    console.log(object);
     const workElement = document.createElement("figure");
     workElement.dataset.categoryId = object.categoryId;
     workElement.dataset.id = object.id;
@@ -144,7 +134,6 @@ function generateWork (object) {
 
 // Fonction pour générer les Works dans la galerie
 function generateWorksGallery(array) {
-    console.log(array);
     gallery.innerHTML = "";
     for (let i = 0; i < array.length; i++) {
         const work = array[i];
@@ -154,7 +143,6 @@ function generateWorksGallery(array) {
 
 // Fonction de création des boutons filtres
 function generateButtons (array) {
-    console.log(array);
     for (let i = 0; i < array.length; i++) {
         const category = array[i];
         const buttonElement = document.createElement("button");
@@ -302,9 +290,6 @@ for (const closeModalElement of closeModalElements) {
 // Gestion du bouton Valider : disabled = "true/false"
 for (const input of inputs) {
     input.addEventListener("input", function () {
-        console.log(modalInputImage.value);
-        console.log(modalInputDescription.value);
-        console.log(modalInputCategory.value);
         if (modalInputImage.value !== "" && modalInputDescription.value !== "" && modalInputCategory.value !== "") {
             modalButtonValidForm.removeAttribute("disabled");
             modalButtonValidForm.innerText = "Valider";
@@ -318,11 +303,8 @@ for (const input of inputs) {
 // Affichage de l'image dans le container image input
 modalInputImage.addEventListener("change", function(e) {
     const file = e.target.files[0];
-    console.log(file);
     let blob = new Blob([file]);
-    console.log(blob);
     const imageUrl = URL.createObjectURL(blob);
-    console.log(imageUrl);
     imagePreview.setAttribute("src", `${imageUrl}`);
     imagePreview.style.height = "180px";
     for (const element of modalInputImageContainerHiddenElements) {
@@ -340,7 +322,6 @@ modalForm.addEventListener("submit", function (e) {
     formData.append("title", titleData);
     formData.append("image", imageData);
     formData.append("category", categoryData);
-    console.log(formData);
 
     let dataFetch = {
         method: "POST",
@@ -350,29 +331,22 @@ modalForm.addEventListener("submit", function (e) {
 
     fetch("http://localhost:5678/api/works", dataFetch)
     .then(function (response) {
-        console.log(response);
         if (response.status === 201) {
             return response.json()
         } else {
             alert("La photo n'a pu être ajoutée.");
-            console.log(response);
             return
         }
     })
     .then(function (response) {
-        console.log(response);
         figureAddedToGallery = response;
-        console.log(figureAddedToGallery);
         generateWork(figureAddedToGallery);
     })
     .then(function () {
         fetchWorksAndCategories();
-        console.log(works);
-
     })
     .then(function () {
         closeModal();
-        console.log(works);
     })
     .catch(error => console.log(error.message));
 });
